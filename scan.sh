@@ -36,6 +36,9 @@ done
 cat "$scan_path/subs.txt" | httprobe -c 50 --prefer-https | anew resolve.txt | wc -l
 
 # Crawling
-timeout 3000s cat "$scan_path/resolve.txt" | waybackurls >> crawl.txt
+timeout 6000s cat "$scan_path/resolve.txt" | waybackurls >> crawl.txt
 
+# Sacar parametros
+arjun -w $ppath/subs.txt -oT parameters
+paramspider -l $ppath/subs.txt | anew parameters
 #################################################### LOGICA DE SCAN ######>
