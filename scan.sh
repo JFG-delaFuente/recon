@@ -22,17 +22,18 @@ echo "Empezamos a escanear las roots"
 cat "$scope_path/roots.txt"
 cp -v "$scope_path/roots.txt" "$scan_path/roots.txt"
 
-# Utilizamos las tools
-# cat "$scan_path/roots.txt" | /home/jose/tools/haktrails/haktrails subdom>
-cat "$scan_path/roots.txt" | subfinder | anew subs.txt | wc -l
-#cat "$scan_path/roots.txt" | /home/jose/tools/shuffledns/cmd/shuffledns/s>
+# Buscar subdominios
+cat "$scan_path/roots.txt" | assetfinder --subs-only | anew subs.txt | wc -l
+lines=$(cat "$scan_path/roots.txt")
+for line in $lines
+do
+    python3 /root/tools/Sublist3r/sublist3r.py -d $line | anew subs.txt | wc -l
+done
 
-# DNS RESOLUTION - Resolve discovered subdomains
-#/home/jose/tools/puredns/puredns resolve "$scan_path/subs.txt" -r "$ppath>
-#/home/jose/tools/dnsx/cmd/dnsx/dnsx -l "$scan_path/resolved.txt" -json -o>
+
 
 # Probar si resuelven los subdominios
-cat "$scan_path/subs.txt" | httpx -mc 200 | anew resolve.txt | wc -l
+cat "$scan_path/subs.txt" | httprobe -c 50 --prefer-https | anew resolve.txt | wc -l
 
 # Crawling
 timeout 3000s cat "$scan_path/resolve.txt" | waybackurls >> crawl.txt
