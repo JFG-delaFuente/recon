@@ -24,11 +24,11 @@ cp -v "$scope_path/roots.txt" "$scan_path/roots.txt"
 
 # Buscar subdominios
 cat "$scan_path/roots.txt" | assetfinder --subs-only | anew subs.txt | wc -l
-lines=$(cat "$scan_path/roots.txt")
-for line in $lines
-do
-    python3 /root/tools/Sublist3r/sublist3r.py -d $line | anew subs.txt | wc -l
-done
+#lines=$(cat "$scan_path/roots.txt")
+#for line in $lines
+#do
+#    python3 /root/tools/Sublist3r/sublist3r.py -d $line | anew subs.txt | wc -l
+#done
 
 
 
