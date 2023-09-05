@@ -25,14 +25,10 @@ cp -v "$scope_path/roots.txt" "$scan_path/roots.txt"
 # Buscar subdominios
 cat "$scan_path/roots.txt" | assetfinder --subs-only | anew subs.txt | wc -l
 
-#lines=$(cat "$scan_path/roots.txt")
-#for line in $lines
-#do
-#    python3 /root/tools/Sublist3r/sublist3r.py -d $line | anew subs.txt | wc -l
-#done
+
 
 # Prueba de subdomain takeovers
-subjack -w "$scan_path/subs.txt" -t 100 -timeout 30 -o results.txt -ssl`
+#subjack -w "$scan_path/subs.txt" -t 100 -timeout 30 -o results.txt -ssl`
 
 
 # Probar si resuelven los subdominios
@@ -42,12 +38,12 @@ cat "$scan_path/subs.txt" | httprobe -c 50 --prefer-https | anew resolve.txt | w
 timeout 6000s cat "$scan_path/resolve.txt" | waybackurls >> crawl.txt
 
 # Eliminar aquellos que no dan status code 200
-cat "$scan_path/crawl.txt" | httpx -mc 200 >> urls.txt
+cat "$scan_path/crawl.txt" | httpx -mc 200 -timeout 1>> urls.txt # timeout de 1 segundo
 
 # Sacar parametros
-resolve="$ppath/resolve.txt"
-for line in $resolve
-do
-    arjun -u $line -oT parameters.txt -t 5
-done
+#resolve="$ppath/urls.txt"
+#for line in $resolve
+#do
+#    arjun -u $line -oT parameters.txt -t 5
+#done
 #################################################### LOGICA DE SCAN ######>
