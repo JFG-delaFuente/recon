@@ -40,10 +40,5 @@ timeout 6000s cat "$scan_path/resolve.txt" | waybackurls >> crawl.txt
 # Eliminar aquellos que no dan status code 200
 cat "$scan_path/crawl.txt" | httpx -mc 200 -timeout 1 >> urls.txt # timeout de 1 segundo
 
-# Sacar parametros
-#resolve="$ppath/urls.txt"
-#for line in $resolve
-#do
-#    arjun -u $line -oT parameters.txt -t 5
-#done
+
 #################################################### LOGICA DE SCAN ######>
