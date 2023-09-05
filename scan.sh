@@ -38,7 +38,7 @@ cat "$scan_path/subs.txt" | httprobe -c 50 --prefer-https | anew resolve.txt | w
 timeout 6000s cat "$scan_path/resolve.txt" | waybackurls >> crawl.txt
 
 # Eliminar aquellos que no dan status code 200
-cat "$scan_path/crawl.txt" | httpx -mc 200 -timeout 1>> urls.txt # timeout de 1 segundo
+cat "$scan_path/crawl.txt" | httpx -mc 200 -timeout 1 >> urls.txt # timeout de 1 segundo
 
 # Sacar parametros
 #resolve="$ppath/urls.txt"
