@@ -8,15 +8,15 @@ templates="/root/nuclei-templates/reflected-xss"
 echo "Empezamos a escanear los XSS con nuclei"
 for line in $(cat $urls)
 do
-  nuclei -u "$line" -t $templates
+  nuclei -u "$line" -t $templates 
 done
 
 # Llamamos a Dalfox
-echo "Empezamos a probar XSS con dalfox"
-for line in $(cat $urls)
-do
-  echo $urls, $line
-  dalfox url "$line" -o xss.txt
-done
+#echo "Empezamos a probar XSS con dalfox"
+#for line in $(cat $urls)
+#do
+#  echo $urls, $line
+#  dalfox url "$line" -o xss.txt
+#done
 
 
